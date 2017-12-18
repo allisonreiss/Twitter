@@ -15,8 +15,8 @@ import KeychainAccess
 class APIManager: SessionManager {
     
     // MARK: TODO: Add App Keys
-    static let consumerKey = "YOUR_KEY_HERE"
-    static let consumerSecret = "YOUR_SECRET_HERE"
+    static let consumerKey = "4cvkw49AZAiux1fDGJLgXdSV3"
+    static let consumerSecret = "zIzauecL6o0hhT03eBEjbhqQUotfBk6P7VrsE7tDZ3BSRNL6Eh"
 
     static let requestTokenURL = "https://api.twitter.com/oauth/request_token"
     static let authorizeURL = "https://api.twitter.com/oauth/authorize"
@@ -54,8 +54,9 @@ class APIManager: SessionManager {
         clearCredentials()
         
         // TODO: Clear current user by setting it to nil
-
+        
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+        
     }
 
     func getCurrentAccount(completion: @escaping (User?, Error?) -> ()) {
