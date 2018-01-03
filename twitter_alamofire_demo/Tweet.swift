@@ -9,17 +9,20 @@
 import Foundation
 
 class Tweet {
-    
+/*
     // MARK: Properties
-    var id: Int? // For favoriting, retweeting & replying
-    var text: String // Text content of tweet
-    var favoriteCount: Int? // Update favorite count label
-    var favorited: Bool? // Configure favorite button
-    var retweetCount: Int // Update favorite count label
-    var retweeted: Bool // Configure retweet button
+    var ProfileImageURL: URL
     var user: User // Contains name, screenname, etc. of tweet author
+    var handle: String?
     var createdAtString: String // Display date
+    var text: String // Text content of tweet
+    var favoriteCount: Int = 0// Update favorite count label
+    var retweetCount: Int = 0// Update favorite count label
     
+    var id: Int? // For favoriting, retweeting & replying
+    var favorited: Bool? // Configure favorite button
+    var retweeted: Bool // Configure retweet button
+
     // For Retweets
     var retweetedByUser: User? // user who retweeted if tweet is retweet
     
@@ -46,6 +49,7 @@ class Tweet {
         
         let user = dictionary["user"] as! [String: Any]
         self.user = User(dictionary: user)
+        handle = ("@" + "\(user.screenName!)")
         
         let createdAtOriginalString = dictionary["created_at"] as! String
         let formatter = DateFormatter()
@@ -58,6 +62,15 @@ class Tweet {
         formatter.timeStyle = .none
         // Convert Date to String
         createdAtString = formatter.string(from: date)
+        
+        //If there is an image, populate the tweetImageURL with displayURL.
+        let entities = dictionary["entities"] as? NSDictionary
+        let media = entities!["media"] as? NSDictionary
+        if media != nil {
+            let displayURL = media!["display_url"] as! String
+            tweetImageURL = URL.init(string: displayURL)
+            print(tweetImageURL!)
+        }
     }
     
     // returns Tweets when initialized with an array of Tweet Dictionaries
@@ -70,5 +83,7 @@ class Tweet {
         }
         return tweets
     }
+ 
+*/
 }
 
