@@ -9,9 +9,9 @@
 import UIKit
 
 class TweetCell: UITableViewCell {
- /*
+ 
     @IBOutlet weak var tweetTextLabel: UILabel!
-    @IBOutlet weak var ProfileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -23,25 +23,23 @@ class TweetCell: UITableViewCell {
         didSet {
             tweetTextLabel.text = tweet.text
             nameLabel.text = tweet!.user!.name! as String
-            handleLabel.text = tweet.handle
-            timeLabel.text = tweet.createdAtString
-            retweetCountLabel.text = tweet.retweetCount
-            favortieCountLabel.text = tweet.favoriteCount
+            handleLabel.text = tweet.user!.screenName! as String
+ //           timeLabel.text = ("\(String(describing: tweet.timeStamp))")!
+            retweetCountLabel.text = "\(String(describing: tweet.retweetCount))"
+            favoriteCountLabel.text = "\(String(describing: tweet.favoriteCount))"
             
-            let pictureURL = tweet!.user!.profileURL
-            ProfileImageView.setImageWith(pictureURL!)
+            let pictureURL = tweet!.user!.profileUrl
+ //           profileImageView.setImageWith(tweet.profileImageUrl!)
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        profileImageView.layer.cornerRadius = 3
+        profileImageView.clipsToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
-    */
 }

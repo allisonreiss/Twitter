@@ -76,7 +76,7 @@ class APIManager: SessionManager {
                 }
         }
     }
-/*
+
     func getHomeTimeLine(completion: @escaping ([Tweet]?, Error?) -> ()) {
 
         // This uses tweets from disk to avoid hitting rate limit. Comment out if you want fresh
@@ -84,7 +84,7 @@ class APIManager: SessionManager {
         if let data = UserDefaults.standard.object(forKey: "hometimeline_tweets") as? Data {
             let tweetDictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
             let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
-                Tweet(dictionary: dictionary)
+                Tweet(dictionary: dictionary as NSDictionary)
             })
 
             completion(tweets, nil)
@@ -111,13 +111,13 @@ class APIManager: SessionManager {
                     UserDefaults.standard.synchronize()
 
                     let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
-                        Tweet(dictionary: dictionary)
+                        Tweet(dictionary: dictionary as NSDictionary)
                     })
                     completion(tweets, nil)
                 }
         }
     }
-    */
+    
     // MARK: TODO: Favorite a Tweet
     
     // MARK: TODO: Un-Favorite a Tweet

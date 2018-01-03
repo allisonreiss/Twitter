@@ -15,7 +15,7 @@ class Tweet: NSObject {
     var profileImageUrl: URL?
     var user: User? // Contains the user's information
 //    var handle: String?  // Contains screen name of tweet author
-    var timeStamp: Date? // Display date
+    var timeStamp: String? // Display date
     var text: String? // Text content of tweet
     var favoriteCount: Int = 0// Update favorite count label
     var retweetCount: Int = 0// Update favorite count label
@@ -37,10 +37,13 @@ class Tweet: NSObject {
         self.user = User(dictionary: dictionary["user"] as! NSDictionary)
         
         let timeStampString = dictionary["created_at"] as? String
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         if let timeStampString = timeStampString {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-            self.timeStamp = formatter.date(from:timeStampString)
+            let timeTweeted = formatter.date(from: timeStampString) as Date?
+            let timeString = "\(timeTweeted!)"
+            let endIndex = timeString.index(timeString.startIndex, offsetBy:10)
+            self.timeStamp = timeString.substring(to: endIndex)
         }
         
         self.text = dictionary["text"] as? String
