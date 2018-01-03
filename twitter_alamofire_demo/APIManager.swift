@@ -72,7 +72,7 @@ class APIManager: SessionManager {
                         completion(nil, JSONError.parsing("Unable to create user dictionary"))
                         return
                     }
-                    completion(User(dictionary: userDictionary), nil)
+                    completion(User(dictionary: userDictionary as NSDictionary), nil)
                 }
         }
     }
