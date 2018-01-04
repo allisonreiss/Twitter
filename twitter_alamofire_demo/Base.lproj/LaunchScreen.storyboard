@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,14 +21,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="TwitterLogoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="q3I-LS-Bwu">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="TwitterLogoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="q3I-LS-Bwu">
                                 <rect key="frame" x="60" y="184" width="200" height="200"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="q3I-LS-Bwu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ci0-Bh-C2x"/>
-                            <constraint firstItem="q3I-LS-Bwu" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="3:4" id="jgj-Xc-0cx"/>
+                            <constraint firstItem="q3I-LS-Bwu" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ij5-34-oLG"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -11,6 +11,8 @@ import UIKit
 class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var tweets: [Tweet] = []
+    private var isMoreTweetsLoading = false
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,16 +24,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-/*
+
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(fetchTweets(forInfiniteScroll:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(getTweets(forInfiniteScroll:)), for: .valueChanged)
         refreshControl.backgroundColor = UIColor.groupTableViewBackground
         tableView.addSubview(refreshControl)
-        
-        var insets = tableView.contentInset
-        insets.bottom += InfiniteScrollActivityView.defaultHeight
-        tableView.contentInset = insets
-*/
+
         getTweets(forInfiniteScroll: false)
     }
     
@@ -49,15 +47,14 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getTweets(forInfiniteScroll: Bool) {
-        APIManager.shared.getHomeTimeLine { (tweets: [Tweet]!, error: Error?) in
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
-//                self.isMoreTweetsLoading = false
-                self.tweets = forInfiniteScroll ? self.tweets + tweets : tweets
-//                self.refreshControl.endRefreshing()
+                self.tweets = tweets
                 self.tableView.reloadData()
             } else if let error = error {
                 print("Error getting home timeline: " + error.localizedDescription)
             }
+            self.refreshControl.endRefreshing()
         }
     }
     
