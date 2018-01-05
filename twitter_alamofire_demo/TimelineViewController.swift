@@ -65,7 +65,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func didTapLogout(_ sender: Any) {
         APIManager.shared.logout()
     }
-
+    
+    @IBAction func didTapCompose(_ sender: Any) {
+        performSegue(withIdentifier: "ComposeSegue", sender: self)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

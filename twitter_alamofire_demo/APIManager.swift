@@ -25,7 +25,6 @@ class APIManager: SessionManager {
     static let callbackURLString = "alamoTwitter://"
     
     
-    // Twitter API methods
     func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
         // Add callback url to open app when returning from Twitter login on web
@@ -34,15 +33,15 @@ class APIManager: SessionManager {
             
             // Save Oauth tokens
             self.save(credential: credential)
-
+            
             self.getCurrentAccount(completion: { (user, error) in
                 if let error = error {
                     failure(error)
                 } else if let user = user {
-                    print("Welcome \(String(describing: user.name))!")
+                    print("Welcome \(user.name)")
                     
-                    // MARK: TODO: set User.current, so that it's persisted
-                    
+                    // set User.current, so that it's persisted
+                    User.currentUser = user
                     success()
                 }
             })
@@ -55,7 +54,7 @@ class APIManager: SessionManager {
         clearCredentials()
         
         // Clear current user by setting it to nil
-        User._currentUser = nil
+        User.currentUser = nil
         
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
         
@@ -181,6 +180,17 @@ class APIManager: SessionManager {
     }
     
     // Compose Tweet
+    func composeTweet(with text: String, completion: @escaping (Tweet?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/statuses/update.json"
+        let parameters = ["status": text]
+        oauthManager.client.post(urlString, parameters: parameters, headers: nil, body: nil, success: { (response: OAuthSwiftResponse) in
+            let tweetDictionary = try! response.jsonObject() as! [String: Any]
+            let tweet = Tweet(dictionary: tweetDictionary as NSDictionary)
+            completion(tweet, nil)
+        }) { (error: OAuthSwiftError) in
+            completion(nil, error.underlyingError)
+        }
+    }
     
     // Get User Timeline
     
